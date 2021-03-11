@@ -19,3 +19,17 @@ add_executable( Kalculator
     ${BISON_KalcParser_OUTPUTS} )
 
 target_include_directories( Kalculator PRIVATE ${CMAKE_BINARY_DIR} )
+
+
+enable_testing()
+
+file( GLOB test_samples "Samples/*" )
+foreach( file ${test_samples} )
+    get_filename_component( nn ${file} NAME )
+
+    add_test( NAME Print_${nn} COMMAND ${CMAKE_BINARY_DIR}/Kalculator print ${file} )
+    add_test( NAME Parser_${nn} COMMAND ${CMAKE_BINARY_DIR}/Kalculator parse ${file} )
+
+endforeach( file ${test_samples} )
+
+set_tests_properties( Print_First PROPERTIES PASS_REGULAR_EXPRESSION "NUMBERPLUSNUMBER" )

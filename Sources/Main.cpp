@@ -51,7 +51,10 @@ int main( int argc, char* argv[] )
     YY_BUFFER_STATE state = yy_scan_string( content.c_str(), lexer );
 
     if( command == C_PrintTokens ) {
-        yylex( lexer );
+        int lexerStatus = 0;
+        do {
+            lexerStatus = yylex( lexer );
+        } while( lexerStatus != 0 );
     } else {
         yyparse( lexer );
     }
