@@ -35,3 +35,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Build debug version
         run: cmake --build debug
+
+      - name: Autotests
+        run: |
+          cd debug
+          ctest
