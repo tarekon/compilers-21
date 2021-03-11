@@ -1,5 +1,6 @@
 %{
 
+#include <kParser.hpp>
 #include <iostream>
 
 using namespace std;
@@ -13,7 +14,8 @@ NUMBER {DIGIT}+
 
 %%
 
-{NUMBER}        { cout << "NUMBER"; }
-"+"             { cout << "PLUS"; }
-"-"             { cout << "MINUS"; }
+{NUMBER}        { cout << "NUMBER"; return NUMBER; }
+"+"             { cout << "PLUS"; return PLUS; }
+"*"             { cout << "MUL"; return MUL; }
 " "             {}
+.               { cerr << "ERROR"; }

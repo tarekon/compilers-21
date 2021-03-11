@@ -3,16 +3,20 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+
+#include <kParser.hpp>
 #include <kLexer.h>
 
 using namespace std;
 
 enum TCommand {
     C_PrintTokens,
+    C_Parse,
 };
 
 static unordered_map<string,TCommand> commandsMap = {
     { "print", C_PrintTokens },
+    { "parse", C_Parse },
 };
 
 int main( int argc, char* argv[] )
@@ -45,5 +49,10 @@ int main( int argc, char* argv[] )
     }
 
     YY_BUFFER_STATE state = yy_scan_string( content.c_str(), lexer );
-    yylex( lexer );
+
+    if( command == C_PrintTokens ) {
+        yylex( lexer );
+    } else {
+        yyparse( lexer );
+    }
 }
