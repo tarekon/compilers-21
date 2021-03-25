@@ -29,6 +29,7 @@ foreach( file ${test_samples} )
 
     add_test( NAME Print_${nn} COMMAND ${CMAKE_BINARY_DIR}/Kalculator print ${file} )
     add_test( NAME Parser_${nn} COMMAND ${CMAKE_BINARY_DIR}/Kalculator parse ${file} )
+    add_test( NAME MemCheck_Print_${nn} COMMAND valgrind --leak-check=full --error-exitcode=1 --tool=memcheck ${CMAKE_BINARY_DIR}/Kalculator print ${file} )
 
 endforeach( file ${test_samples} )
 
