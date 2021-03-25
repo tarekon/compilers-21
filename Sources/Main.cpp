@@ -58,4 +58,6 @@ int main( int argc, char* argv[] )
     } else {
         yyparse( lexer );
     }
+
+    yylex_destroy( lexer );
 }
